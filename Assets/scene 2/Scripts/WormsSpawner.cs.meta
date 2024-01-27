@@ -3,7 +3,10 @@ guid: 500f3ec31c8a9ff4997002fc8b0c7222
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - wormPrefab: {instanceID: 0}
+  - swoosh: {fileID: 8300000, guid: de74ce663e994bf4580743a927199899, type: 3}
+  - swoosh2: {fileID: 8300000, guid: f30f6cbde0a5b0c479f7ec30abe5d77f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
