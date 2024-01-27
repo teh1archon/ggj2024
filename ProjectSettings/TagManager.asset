@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Fork
+  - Sock
+  - ThePlayer
+  - Falafel
+  - Hala
+  - Orange
+  - Grapes
   layers:
   - Default
   - TransparentFX
