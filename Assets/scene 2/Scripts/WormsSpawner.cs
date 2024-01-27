@@ -16,6 +16,11 @@ public class WormsSpawner : MonoBehaviour
     int wormsSpawned = 0;
     Coroutine loop;
 
+    public AudioClip[] badSounds;
+    public AudioClip[] goodSounds;
+    public AudioClip swoosh;
+    public AudioClip swoosh2;
+
     public List<string> goodWords = new List<string> { "good", "apple", "yay"};
     public List<string> badWords = new List<string> { "bad", "orange", "nay" };
 
@@ -79,13 +84,17 @@ public class WormsSpawner : MonoBehaviour
                 if (Random.value < (float)goodWords.Count / ((float)goodWords.Count + badWords.Count))
                 {
                     string wrd = goodWords[goodIdx % goodWords.Count];
-                    w.SetWord(wrd, true, ()=>nextGoodWorks.Add(wrd));
+                    w.SetWord(wrd, true, ()=> { nextGoodWorks.Add(wrd);
+                        PlayGood();
+                    }, () => PlaySwoosh(true));
                     goodIdx++;
                 }
                 else
                 {
                     string wrd = badWords[badIdx % badWords.Count];
-                    w.SetWord(wrd, false, () => nextbadWorks.Add(wrd));
+                    w.SetWord(wrd, false, () => {
+                        nextbadWorks.Add(wrd); PlayBad();
+                        },() => PlaySwoosh(true));
                     badIdx++;
                 }
                 w.Appear();
@@ -104,6 +113,26 @@ public class WormsSpawner : MonoBehaviour
                     yield return new WaitForSeconds(interval);
             }
         }
+    }
+
+    public void PlayBad()
+    {
+        AudioSource.PlayClipAtPoint(badSounds[Random.Range(0, badSounds.Length)], Camera.main.transform.position);
+    }
+
+    public void PlayGood()
+    {
+        AudioSource.PlayClipAtPoint(goodSounds[Random.Range(0, goodSounds.Length)], Camera.main.transform.position);
+    }
+
+    public void PlaySwoosh(bool good)
+    {
+        if (good)
+        {
+            AudioSource.PlayClipAtPoint(swoosh, Camera.main.transform.position);
+        }
+        else
+            AudioSource.PlayClipAtPoint(swoosh2, Camera.main.transform.position);
     }
 
     public Vector3 GetRandomPointInRect(RectTransform rt)
