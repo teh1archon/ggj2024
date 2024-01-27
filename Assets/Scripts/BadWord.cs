@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -8,6 +9,8 @@ using UnityEngine;
 
 public class BadWord : MonoBehaviour
 {
+    Scene3GameManager gameManager;
+
     void showWord()
     {
         gameObject.SetActive(true);
@@ -18,6 +21,7 @@ public class BadWord : MonoBehaviour
     float endTime;
     void Start()
     {
+        gameManager = FindObjectOfType<Scene3GameManager>();
         gameObject.SetActive(false);
         startTime = UnityEngine.Random.value*7;
         endTime = startTime + 10f;
@@ -36,6 +40,7 @@ public class BadWord : MonoBehaviour
     }
     public void OnMouseDown()
     {
+        gameManager.RemoveThought();
         // Actions to perform on mouse click
         Debug.Log("Mouse Clicked!");
         Destroy(gameObject);

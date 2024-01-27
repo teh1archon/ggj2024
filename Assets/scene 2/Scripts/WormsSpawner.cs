@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WormsSpawner : MonoBehaviour
 {
@@ -108,11 +109,19 @@ public class WormsSpawner : MonoBehaviour
                 interval -= intervalInc;
 
                 if (incremations >= 9)
+                {
                     StopCoroutine(loop);
+                    Invoke("LoadStageScene", 2);
+                }
                 else
                     yield return new WaitForSeconds(interval);
             }
         }
+    }
+
+    public void LoadStageScene()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void PlayBad()
